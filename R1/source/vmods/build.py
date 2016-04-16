@@ -47,7 +47,7 @@ class vmod(object):
 			return r[rev]["url_vcc"]
 		g = self.j.get("github")
 		if g != None:
-			s = "https://raw.githubusercontent.com/" 
+			s = "https://raw.githubusercontent.com/"
 			s += g["user"] + "/"
 			s += g["project"] + "/"
 			s += g["branches"][rev] + "/"
@@ -57,7 +57,7 @@ class vmod(object):
 
 	def www_table(self):
 		l = []
-		l.append(self.j.get("name"))
+		l.append("_`%s`" % self.j.get("name"))
 		l.append(self.j.get("desc"))
 		l.append(self.j.get("license"))
 		l.append(self.j.get("status"))
@@ -130,13 +130,24 @@ def make_www_table():
 	fo.write('''
 .. _vmods:
 
+.. raw:: html
+
+	<script type="text/javascript">
+	$(document).ready(function () {
+		var hash = window.location.hash;
+		if (hash) {
+			$(hash).parents('tr').css('background-color', '#E9F6FC').css('font-weight', 'bold');
+		}
+	});
+	</script>
+
 Varnish Modules
 ---------------
 
 VMODs are extensions written for Varnish Cache. This page serves as a
 directory of maintained VMODs.
 
-If you have written a VMOD and want it listed here please send a PR 
+If you have written a VMOD and want it listed here please send a PR
 to `this github repo <https://github.com/varnishcache/homepage/>`__ and
 we will be happy to include it.
 
